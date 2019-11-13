@@ -15,11 +15,9 @@ class CreateView(generics.ListCreateAPIView):
     def post(self, request):
         time = datetime.now()
         request_time = time.time()
-        # get time as string for example suppose on request we get time value as given:
-        # then convert time string to time object of python
-        # time_object = datetime.strptime(time_str, '%H::%M::%S').time()
-        min = time.replace(hour=8, minute=0, second=0, microsecond=0)
-        max = time.replace(hour=12, minute=0, second=0, microsecond=0)
+        # time is in 24 hours so set the max. and min. on basic of it
+        min = time.replace(hour=12, minute=0, second=0, microsecond=0)
+        max = time.replace(hour=20, minute=0, second=0, microsecond=0)
         min_range = min.time()
         max_range = max.time()
         serializer = HouseDetailsSerializer(data=request.data)
