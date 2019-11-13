@@ -46,3 +46,4 @@ class DetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+
