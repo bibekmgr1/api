@@ -13,21 +13,19 @@ class CreateView(generics.ListCreateAPIView):
     serializer_class = HouseDetailsSerializer
 
     def post(self, request):
-        save = request.POST.get ('time')
+        time = datetime.now()
+        request_time = time.time()
         # get time as string for example suppose on request we get time value as given:
         # then convert time string to time object of python
         # time_object = datetime.strptime(time_str, '%H::%M::%S').time()
-        time_object = datetime.strptime(save, '%H::%M::%S')
-        start = datetime.time([8, 0, 0])
-        end = datetime.time([12, 0, 0])
+        min = time.replace(hour=8, minute=0, second=0, microsecond=0)
+        max = time.replace(hour=12, minute=0, second=0, microsecond=0)
+        min_range = min.time()
+        max_range = max.time()
         serializer = HouseDetailsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-        print("is valid")
-        print(start)
-        print(save)
-        print(end)
-        if start <= save <= end:
+        if min_range < request_time < max_range:
             return JsonResponse({
                 'status': 'True'
             })
