@@ -6,7 +6,7 @@ from .views import DetailsView
 
 
 urlpatterns = {
-    url(r'housedetails/$', CreateView.as_view(), name="create"),
+    url(r'housedetails$', CreateView.as_view(), name="create"),
 url(r'housedetails/(?P<pk>[0-9]+)/$',DetailsView.as_view(), name="details"),
 }
 

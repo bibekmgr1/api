@@ -13,6 +13,9 @@ class CreateView(generics.ListCreateAPIView):
     serializer_class = HouseDetailsSerializer
 
     def post(self, request):
+        user_value= request.data['power_consumption']
+        value=int(user_value)
+        pre_define_value=15
         time = datetime.now()
         request_time = time.time()
         # time is in 24 hours so set the max. and min. on basic of it
@@ -24,11 +27,12 @@ class CreateView(generics.ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
         if min_range < request_time < max_range:
-            return JsonResponse({
-                'status': 'True'
-            })
+            if value > pre_define_value:
+               return JsonResponse({
+                 'status': 'True'
+                 })
         else:
-            return JsonResponse({
+             return JsonResponse({
                 'status': 'False'
             })
     def perform_create(self, serializer):

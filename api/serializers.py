@@ -7,5 +7,5 @@ class HouseDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = HouseDetails
-        fields = ('id', 'name', 'date_created', 'date_modified','power_consumption')
+        fields = ('id','name', 'date_created', 'date_modified','power_consumption')
         read_only_fields = ('date_created', 'date_modified')
